@@ -1,0 +1,14 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: yb-eureka-discovery-v1
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss-SSS
+    time-zone: GMT+8
+
+# Logging配置
+logging:
+  level: ${log-level}
+  file: ${log-path}/eureka-server.log
+  config: classpath:logback-spring.xml

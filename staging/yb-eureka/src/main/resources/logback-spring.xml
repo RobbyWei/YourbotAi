@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration debug="false" scan="true" scanPeriod="10 seconds">
+    <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+    <property name="LOG_FILE" value="${LOG_FILE:-${LOG_PATH:-${LOG_TEMP:-${java.io.tmpdir:-/tmp}}}/eureka-server.log}" />
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
+    <contextName>yb-eureka</contextName>
+    <logger name="org.springframework.web" level="error" />
+    <logger name="org.springboot.sample" level="error" />
+    <property name="maxHistory" value="30" />
+
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_FILE}</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_FILE}.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>${maxHistory}</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%date %level | %-5thread| %-5logger{36} || [%-5file:%L:%C@%M] - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <!-- 打印SQL
+    <logger name="[DAO包名]" level="debug" />
+     -->
+    <root level="debug">
+        <appender-ref ref="CONSOLE" />
+    </root>
+    <root level="info">
+        <appender-ref ref="file" />
+    </root>
+</configuration>
